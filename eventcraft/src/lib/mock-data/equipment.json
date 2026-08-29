@@ -1,0 +1,198 @@
+{
+    "equipment": {
+        "audioVisual": [
+            {
+                "id": "projector-screen",
+                "name": "Projector + Screen",
+                "description": "HD projector with 10ft screen",
+                "price": 150,
+                "unit": "per event",
+                "maxQuantity": 3
+            },
+            {
+                "id": "wireless-mic",
+                "name": "Wireless Microphone",
+                "description": "Professional handheld wireless mic",
+                "price": 75,
+                "unit": "per event",
+                "maxQuantity": 4
+            },
+            {
+                "id": "speakers",
+                "name": "PA Speaker System",
+                "description": "Professional PA system with 2 speakers",
+                "price": 200,
+                "unit": "per event",
+                "maxQuantity": 2
+            },
+            {
+                "id": "video-recording",
+                "name": "Video Recording Setup",
+                "description": "Multi-camera recording with live switching",
+                "price": 450,
+                "unit": "per event",
+                "maxQuantity": 1
+            }
+        ],
+        "staging": [
+            {
+                "id": "stage-platform",
+                "name": "Stage Platform",
+                "description": "4m x 3m raised stage with stairs",
+                "price": 400,
+                "unit": "per event",
+                "maxQuantity": 1
+            },
+            {
+                "id": "lectern",
+                "name": "Lectern/Podium",
+                "description": "Professional lectern with mic mount",
+                "price": 80,
+                "unit": "per event",
+                "maxQuantity": 2
+            },
+            {
+                "id": "backdrop",
+                "name": "Event Backdrop",
+                "description": "3m x 2.5m customizable backdrop",
+                "price": 250,
+                "unit": "per event",
+                "maxQuantity": 2
+            },
+            {
+                "id": "red-carpet",
+                "name": "Red Carpet",
+                "description": "10m red carpet with stanchions",
+                "price": 180,
+                "unit": "per event",
+                "maxQuantity": 1
+            }
+        ],
+        "lighting": [
+            {
+                "id": "basic-lighting",
+                "name": "Basic Event Lighting",
+                "description": "Standard ambient lighting package",
+                "price": 150,
+                "unit": "per event",
+                "maxQuantity": 1
+            },
+            {
+                "id": "uplighting",
+                "name": "Uplighting Package",
+                "description": "16 LED uplights in your choice of color",
+                "price": 350,
+                "unit": "per event",
+                "maxQuantity": 1
+            },
+            {
+                "id": "spotlights",
+                "name": "Spotlights",
+                "description": "Professional follow spotlights",
+                "price": 200,
+                "unit": "per event",
+                "maxQuantity": 4
+            },
+            {
+                "id": "dance-floor-lighting",
+                "name": "Dance Floor Lighting",
+                "description": "Moving heads, strobes, and dance floor effects",
+                "price": 450,
+                "unit": "per event",
+                "maxQuantity": 1
+            }
+        ],
+        "furniture": [
+            {
+                "id": "extra-chairs",
+                "name": "Extra Chairs",
+                "description": "Banquet chairs (set of 10)",
+                "price": 50,
+                "unit": "per 10",
+                "maxQuantity": 50
+            },
+            {
+                "id": "cocktail-tables",
+                "name": "Cocktail Tables",
+                "description": "High bar tables with covers",
+                "price": 35,
+                "unit": "per table",
+                "maxQuantity": 20
+            },
+            {
+                "id": "lounge-seating",
+                "name": "Lounge Seating",
+                "description": "2 sofas + coffee table set",
+                "price": 280,
+                "unit": "per set",
+                "maxQuantity": 5
+            },
+            {
+                "id": "photo-booth",
+                "name": "Photo Booth",
+                "description": "Digital photo booth with props and prints",
+                "price": 650,
+                "unit": "per event",
+                "maxQuantity": 1
+            }
+        ],
+        "decor": [
+            {
+                "id": "floral-centerpieces",
+                "name": "Floral Centerpieces",
+                "description": "Fresh flower arrangements for tables",
+                "price": 85,
+                "unit": "per table",
+                "maxQuantityRule": "tables"
+            },
+            {
+                "id": "balloon-arrangements",
+                "name": "Balloon Arrangements",
+                "description": "Balloon arches and table arrangements",
+                "price": 350,
+                "unit": "per event",
+                "maxQuantity": 1
+            },
+            {
+                "id": "themed-decorations",
+                "name": "Themed Decorations",
+                "description": "Custom themed decoration package",
+                "price": 500,
+                "unit": "per event",
+                "maxQuantity": 1
+            }
+        ]
+    },
+    "eventTypeRecommendations": {
+        "corporate-conference": [
+            "projector-screen",
+            "wireless-mic",
+            "lectern"
+        ],
+        "wedding-reception": [
+            "floral-centerpieces",
+            "dance-floor-lighting"
+        ],
+        "birthday-party": [
+            "balloon-arrangements",
+            "photo-booth",
+            "speakers"
+        ],
+        "product-launch": [
+            "projector-screen",
+            "stage-platform",
+            "spotlights",
+            "video-recording"
+        ],
+        "gala-fundraiser": [
+            "uplighting",
+            "red-carpet",
+            "floral-centerpieces"
+        ],
+        "workshop-training": [
+            "projector-screen",
+            "wireless-mic",
+            "extra-chairs"
+        ]
+    }
+}

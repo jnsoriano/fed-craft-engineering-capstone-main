@@ -1,0 +1,12 @@
+{
+    "pricingRules": {
+        "weekendSurcharge": { "percentage": 15, "appliesTo": "subtotal", "days": ["Friday", "Saturday", "Sunday"] },
+        "gst": { "percentage": 10, "appliesTo": "subtotal" }
+    },
+    "promoCodes": [
+        { "code": "EARLYBIRD", "discountPercentage": 10, "validUntil": "2026-12-31" },
+        { "code": "WEEKDAY20", "discountPercentage": 20, "validDays": ["Monday", "Tuesday", "Wednesday", "Thursday"] },
+        { "code": "FIRST50", "discountAmount": 50, "validUntil": "2026-10-31" }
+    ],
+    "bookingReferenceFormat": "EVT-YYYYMMDD-XXXX"
+}

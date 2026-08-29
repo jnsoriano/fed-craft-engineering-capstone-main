@@ -1,0 +1,76 @@
+{
+    "eventTypes": [
+        {
+            "id": "corporate-conference",
+            "name": "Corporate Conference",
+            "icon": "work",
+            "minGuests": 50,
+            "maxGuests": 500,
+            "typicalDurationHours": { "min": 4, "max": 8 },
+            "complexity": "high",
+            "description": "Professional conferences, seminars, and corporate meetings",
+            "suggestedBudgetPerGuest": { "min": 150, "max": 400 },
+            "recommendedEquipment": ["projector-screen", "wireless-mic", "lectern"]
+        },
+        {
+            "id": "wedding-reception",
+            "name": "Wedding Reception",
+            "icon": "favorite",
+            "minGuests": 30,
+            "maxGuests": 300,
+            "typicalDurationHours": { "min": 5, "max": 6 },
+            "complexity": "high",
+            "description": "Wedding celebrations and receptions",
+            "suggestedBudgetPerGuest": { "min": 200, "max": 500 },
+            "recommendedEquipment": ["floral-centerpieces", "dance-floor-lighting"]
+        },
+        {
+            "id": "birthday-party",
+            "name": "Birthday Party",
+            "icon": "cake",
+            "minGuests": 10,
+            "maxGuests": 100,
+            "typicalDurationHours": { "min": 3, "max": 4 },
+            "complexity": "low",
+            "description": "Birthday celebrations for all ages",
+            "suggestedBudgetPerGuest": { "min": 50, "max": 150 },
+            "recommendedEquipment": ["balloon-arrangements", "photo-booth", "speakers"]
+        },
+        {
+            "id": "product-launch",
+            "name": "Product Launch",
+            "icon": "rocket_launch",
+            "minGuests": 40,
+            "maxGuests": 250,
+            "typicalDurationHours": { "min": 2, "max": 4 },
+            "complexity": "medium",
+            "description": "Product unveilings and launch events",
+            "suggestedBudgetPerGuest": { "min": 100, "max": 300 },
+            "recommendedEquipment": ["projector-screen", "stage-platform", "spotlights", "video-recording"]
+        },
+        {
+            "id": "gala-fundraiser",
+            "name": "Gala/Fundraiser",
+            "icon": "local_activity",
+            "minGuests": 80,
+            "maxGuests": 400,
+            "typicalDurationHours": { "min": 4, "max": 5 },
+            "complexity": "high",
+            "description": "Formal galas and charity fundraising events",
+            "suggestedBudgetPerGuest": { "min": 250, "max": 600 },
+            "recommendedEquipment": ["uplighting", "red-carpet", "floral-centerpieces"]
+        },
+        {
+            "id": "workshop-training",
+            "name": "Workshop/Training",
+            "icon": "school",
+            "minGuests": 15,
+            "maxGuests": 100,
+            "typicalDurationHours": { "min": 2, "max": 6 },
+            "complexity": "low",
+            "description": "Educational workshops and training sessions",
+            "suggestedBudgetPerGuest": { "min": 80, "max": 200 },
+            "recommendedEquipment": ["projector-screen", "wireless-mic", "extra-chairs"]
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+{
+    "validationRules": {
+        "step1_eventDetails": {
+            "eventType": {
+                "required": true
+            },
+            "eventName": {
+                "required": true,
+                "minLength": 3,
+                "maxLength": 100
+            },
+            "eventDate": {
+                "required": true,
+                "minDaysFromNow": 14
+            },
+            "eventDate_largeEvent": {
+                "condition": "guests > 200",
+                "minDaysFromNow": 21
+            },
+            "startTime": {
+                "required": true
+            },
+            "endTime": {
+                "required": true,
+                "mustBeAfter": "startTime"
+            },
+            "duration": {
+                "minHours": 2,
+                "maxHours": 12
+            },
+            "expectedGuests": {
+                "required": true,
+                "min": 10,
+                "max": 500
+            },
+            "eventDescription": {
+                "maxLength": 500
+            },
+            "budgetRange": {
+                "required": true,
+                "min": 1000,
+                "max": 100000
+            }
+        },
+        "step2_equipmentAndBooking": {
+            "contactName": {
+                "required": true
+            },
+            "email": {
+                "required": true,
+                "format": "email"
+            },
+            "phone": {
+                "required": true,
+                "format": "phone"
+            },
+            "specialRequests": {
+                "maxLength": 1000
+            },
+            "termsAccepted": {
+                "required": true,
+                "mustBeTrue": true
+            }
+        }
+    },
+    "warningsNonBlocking": [
+        {
+            "condition": "currentSpend > budget",
+            "message": "You are over budget"
+        },
+        {
+            "condition": "currentSpend > budget * 0.8",
+            "message": "You are approaching your budget limit"
+        }
+    ]
+}

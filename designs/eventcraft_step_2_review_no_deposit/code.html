@@ -1,0 +1,362 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>EventCraft - Equipment, Services &amp; Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#3980f4",
+                        "primary": "#000000",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e5eeff",
+                        "on-primary-fixed": "#131b2e",
+                        "tertiary": "#000000",
+                        "surface": "#f8f9ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "tertiary-fixed-dim": "#adc6ff",
+                        "primary-container": "#131b2e",
+                        "background": "#f8f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#0b1c30",
+                        "on-primary-container": "#7c839b",
+                        "outline-variant": "#c6c6cd",
+                        "surface-tint": "#565e74",
+                        "on-tertiary": "#ffffff",
+                        "background-subtle": "#F8FAFC",
+                        "on-secondary-container": "#00714d",
+                        "budget-danger": "#EF4444",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-surface-variant": "#45464d",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-container-high": "#dce9ff",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#6cf8bb",
+                        "outline": "#76777d",
+                        "inverse-surface": "#213145",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-tertiary-fixed": "#001a42",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary-fixed": "#d8e2ff",
+                        "on-tertiary-fixed-variant": "#004395",
+                        "inverse-on-surface": "#eaf1ff",
+                        "budget-warning": "#F59E0B",
+                        "on-secondary-fixed": "#002113",
+                        "inverse-primary": "#bec6e0",
+                        "on-background": "#0b1c30",
+                        "secondary": "#006c49",
+                        "tertiary-container": "#001a42",
+                        "primary-fixed": "#dae2fd",
+                        "surface-white": "#FFFFFF",
+                        "surface-variant": "#d3e4fe",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "64px",
+                        "container-max": "1200px",
+                        "lg": "40px",
+                        "margin-mobile": "16px",
+                        "md": "24px",
+                        "sm": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .budget-bar-shadow {
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.open {
+            max-height: 1000px;
+            opacity: 1;
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+        .accordion-icon.open {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-surface-white font-body-md text-on-background pb-32">
+<!-- TopAppBar -->
+<header class="bg-surface-white border-b border-outline-variant sticky top-0 z-40">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-md h-20 flex items-center justify-between">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-3xl fill">auto_awesome</span>
+<span class="font-headline-md text-primary tracking-tight">EventCraft</span>
+</div>
+<!-- Stepper -->
+<div class="hidden md:flex items-center gap-4"><div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full border-2 border-primary text-primary font-bold flex items-center justify-center">
+            <span class="material-symbols-outlined text-sm">check</span>
+          </div>
+<span class="font-body-md text-on-surface-variant">Event Details</span>
+</div>
+<div class="w-8 h-px bg-outline-variant"></div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full border-2 border-primary text-primary flex items-center justify-center font-bold">2</div>
+<span class="font-body-md text-primary font-semibold">Review</span>
+</div></div>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+<span class="font-label-sm uppercase">Save &amp; Exit</span>
+<span class="material-symbols-outlined text-xl">logout</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-lg py-lg">
+<!-- Stepper -->
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Equipment & Services -->
+<div class="lg:col-span-7 space-y-md">
+<h1 class="font-headline-lg text-headline-lg md:font-headline-lg md:text-headline-lg text-primary mb-md">Equipment &amp; Services</h1>
+<!-- Accordion 1: A/V -->
+<div class="bg-surface-white border border-outline-variant rounded-lg overflow-hidden">
+<button class="w-full flex justify-between items-center p-md text-left hover:bg-surface-container-low transition-colors" onclick="toggleAccordion('av-content', 'av-icon')">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">surround_sound</span>
+<span class="font-headline-md text-headline-md text-primary">Audio/Visual</span>
+</div>
+<span class="material-symbols-outlined accordion-icon text-on-surface-variant" id="av-icon">expand_more</span>
+</button>
+<div class="accordion-content bg-surface-white border-t border-outline-variant px-md py-sm" id="av-content">
+<!-- Item -->
+<div class="flex justify-between items-center py-sm border-b border-outline-variant last:border-0">
+<div>
+<div class="font-bold text-primary">Projector + Screen</div>
+<div class="text-sm text-on-surface-variant font-label-sm">Per event • $150</div>
+<div class="mt-1 inline-flex items-center px-2 py-0.5 rounded text-xs bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px] mr-1">recommend</span> Recommended
+                                </div>
+</div>
+<div class="flex items-center gap-2 border border-outline-variant rounded-DEFAULT p-1">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">-</button>
+<span class="w-6 text-center font-label-sm">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">+</button>
+</div>
+</div>
+<!-- Item -->
+<div class="flex justify-between items-center py-sm border-b border-outline-variant last:border-0">
+<div>
+<div class="font-bold text-primary">Wireless microphone</div>
+<div class="text-sm text-on-surface-variant font-label-sm">Per event • $75</div>
+</div>
+<div class="flex items-center gap-2 border border-outline-variant rounded-DEFAULT p-1">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">-</button>
+<span class="w-6 text-center font-label-sm">2</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Accordion 2: Decor -->
+<div class="bg-surface-white border border-outline-variant rounded-lg overflow-hidden">
+<button class="w-full flex justify-between items-center p-md text-left hover:bg-surface-container-low transition-colors" onclick="toggleAccordion('decor-content', 'decor-icon')">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">celebration</span>
+<span class="font-headline-md text-headline-md text-primary">Decor</span>
+</div>
+<span class="material-symbols-outlined accordion-icon text-on-surface-variant" id="decor-icon">expand_more</span>
+</button>
+<div class="accordion-content bg-surface-white border-t border-outline-variant px-md py-sm" id="decor-content">
+<!-- Item -->
+<div class="flex justify-between items-center py-sm border-b border-outline-variant last:border-0">
+<div>
+<div class="font-bold text-primary">Floral centerpieces</div>
+<div class="text-sm text-on-surface-variant font-label-sm">Per table • $85</div>
+</div>
+<div class="flex items-center gap-2 border border-outline-variant rounded-DEFAULT p-1">
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">-</button>
+<span class="w-6 text-center font-label-sm">12</span>
+<button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Accordion 3: Staging -->
+<div class="bg-surface-white border border-outline-variant rounded-lg overflow-hidden">
+<button class="w-full flex justify-between items-center p-md text-left hover:bg-surface-container-low transition-colors" onclick="toggleAccordion('staging-content', 'staging-icon')">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">layers</span>
+<span class="font-headline-md text-headline-md text-primary">Staging</span>
+</div>
+<span class="material-symbols-outlined accordion-icon text-on-surface-variant" id="staging-icon">expand_more</span>
+</button>
+<div class="accordion-content bg-surface-white border-t border-outline-variant px-md py-sm" id="staging-content">
+<div class="flex justify-between items-center py-sm border-b border-outline-variant last:border-0"><div><div class="font-bold text-primary">Stage/platform</div><div class="text-sm text-on-surface-variant font-label-sm">Per event • $400</div></div><div class="flex items-center gap-2 border border-outline-variant rounded-DEFAULT p-1"><button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">-</button><span class="w-6 text-center font-label-sm">0</span><button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">+</button></div></div>
+<div class="flex justify-between items-center py-sm border-b border-outline-variant last:border-0"><div><div class="font-bold text-primary">Lectern/podium</div><div class="text-sm text-on-surface-variant font-label-sm">Per event • $80</div></div><div class="flex items-center gap-2 border border-outline-variant rounded-DEFAULT p-1"><button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">-</button><span class="w-6 text-center font-label-sm">0</span><button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">+</button></div></div>
+</div>
+</div>
+<!-- Accordion 4: Lighting -->
+<div class="bg-surface-white border border-outline-variant rounded-lg overflow-hidden">
+<button class="w-full flex justify-between items-center p-md text-left hover:bg-surface-container-low transition-colors" onclick="toggleAccordion('lighting-content', 'lighting-icon')">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<span class="font-headline-md text-headline-md text-primary">Lighting</span>
+</div>
+<span class="material-symbols-outlined accordion-icon text-on-surface-variant" id="lighting-icon">expand_more</span>
+</button>
+<div class="accordion-content bg-surface-white border-t border-outline-variant px-md py-sm" id="lighting-content">
+<div class="flex justify-between items-center py-sm border-b border-outline-variant last:border-0"><div><div class="font-bold text-primary">Basic lighting</div><div class="text-sm text-on-surface-variant font-label-sm">Per event • $150</div></div><div class="flex items-center gap-2 border border-outline-variant rounded-DEFAULT p-1"><button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">-</button><span class="w-6 text-center font-label-sm">0</span><button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">+</button></div></div>
+</div>
+</div>
+<!-- Accordion 5: Furniture -->
+<div class="bg-surface-white border border-outline-variant rounded-lg overflow-hidden">
+<button class="w-full flex justify-between items-center p-md text-left hover:bg-surface-container-low transition-colors" onclick="toggleAccordion('furniture-content', 'furniture-icon')">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">chair</span>
+<span class="font-headline-md text-headline-md text-primary">Furniture</span>
+</div>
+<span class="material-symbols-outlined accordion-icon text-on-surface-variant" id="furniture-icon">expand_more</span>
+</button>
+<div class="accordion-content bg-surface-white border-t border-outline-variant px-md py-sm" id="furniture-content">
+<div class="flex justify-between items-center py-sm border-b border-outline-variant last:border-0"><div><div class="font-bold text-primary">Extra chairs</div><div class="text-sm text-on-surface-variant font-label-sm">Per 10 • $50</div></div><div class="flex items-center gap-2 border border-outline-variant rounded-DEFAULT p-1"><button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">-</button><span class="w-6 text-center font-label-sm">0</span><button class="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-DEFAULT">+</button></div></div>
+</div>
+</div></div>
+<!-- Right Column: Booking Summary & Form -->
+<div class="lg:col-span-5">
+<div class="bg-surface-white border border-outline-variant rounded-xl p-md sticky top-24">
+<h2 class="font-headline-md text-headline-md text-primary mb-sm"><div class="flex justify-between items-center">Booking Summary <button class="text-sm text-secondary font-bold hover:underline">Edit</button></div></h2>
+<!-- Subtotals -->
+<div class="space-y-xs text-sm mb-md border-b border-outline-variant pb-md">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Venue (Base + Parking)</span>
+<span class="font-label-sm text-primary">$4,500.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Catering (150 guests)</span>
+<span class="font-label-sm text-primary">$12,750.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Equipment &amp; Services</span>
+<span class="font-label-sm text-primary">$1,320.00</span>
+</div>
+<div class="flex justify-between pt-2 border-t border-outline-variant border-dashed">
+<span class="text-on-surface-variant font-bold">Subtotal</span>
+<span class="font-label-sm text-primary font-bold">$18,570.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">GST (10%)</span>
+<span class="font-label-sm text-primary">$1,857.00</span>
+</div>
+<div class="flex justify-between pt-2">
+<span class="text-primary font-bold text-lg">Total</span>
+<span class="font-label-sm text-primary font-bold text-lg">$20,427.00</span>
+</div>
+</div>
+<!-- Form -->
+<form class="space-y-sm">
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-1">Contact Name</label>
+<input class="w-full border-outline-variant rounded-DEFAULT p-2 focus:border-on-tertiary-container focus:ring-1 focus:ring-on-tertiary-container bg-surface-white" type="text">
+</div>
+<div>
+<label class="block text-sm font-medium text-on-surface-variant mb-1">Email</label>
+<input class="w-full border-outline-variant rounded-DEFAULT p-2 focus:border-on-tertiary-container focus:ring-1 focus:ring-on-tertiary-container bg-surface-white" type="email">
+</div><div><label class="block text-sm font-medium text-on-surface-variant mb-1">Phone (Required)</label><input class="w-full border-outline-variant rounded-DEFAULT p-2 focus:border-on-tertiary-container focus:ring-1 focus:ring-on-tertiary-container bg-surface-white" required="" type="tel"></div><div><label class="block text-sm font-medium text-on-surface-variant mb-1">Company/Organization (Optional)</label><input class="w-full border-outline-variant rounded-DEFAULT p-2 focus:border-on-tertiary-container focus:ring-1 focus:ring-on-tertiary-container bg-surface-white" type="text"></div>
+<div><label class="block text-sm font-medium text-on-surface-variant mb-1">Special Requests (Optional)</label><textarea class="w-full border-outline-variant rounded-DEFAULT p-2 focus:border-on-tertiary-container focus:ring-1 focus:ring-on-tertiary-container bg-surface-white" rows="3"></textarea></div><div><label class="block text-sm font-medium text-on-surface-variant mb-1">Promo Code</label><div class="flex gap-2"><input class="flex-grow border-outline-variant rounded-DEFAULT p-2 focus:border-on-tertiary-container focus:ring-1 focus:ring-on-tertiary-container bg-surface-white" type="text"><button class="px-4 py-2 border border-primary rounded-DEFAULT font-bold text-sm hover:bg-surface-container-low transition-colors" type="button">Apply</button></div></div><div class="flex items-start gap-2 mt-4">
+<input class="mt-1 rounded-DEFAULT border-outline-variant text-primary focus:ring-primary" id="terms" type="checkbox">
+<label class="text-sm text-on-surface-variant" for="terms">I agree to the Terms &amp; Conditions.</label>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-bold mt-md hover:bg-on-surface transition-colors" type="button">
+                            Book Event
+                        </button>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- Persistent Budget Tracker -->
+<div class="fixed bottom-0 md:bottom-auto left-0 w-full bg-surface-white border-t border-outline-variant budget-bar-shadow z-50 p-sm md:top-auto">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row items-center gap-md">
+<div class="flex-shrink-0 w-full md:w-auto flex justify-between md:block">
+<span class="text-sm font-medium text-on-surface">Budget:</span>
+<span class="font-label-sm font-bold text-primary text-lg">$22,000</span>
+</div>
+<div class="flex-grow w-full">
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-budget-warning" style="width: 92%;"></div>
+</div>
+<div class="flex justify-between mt-1 text-xs font-label-sm">
+<span class="text-on-surface font-medium">Spend: $20,427</span>
+<span class="text-budget-warning font-bold">Near Budget (92%)</span>
+</div>
+</div>
+<div class="flex-shrink-0 hidden md:block">
+<span class="text-sm font-medium text-on-surface">Remaining:</span>
+<span class="font-label-sm font-bold text-primary text-lg">$1,573</span>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-24 left-0 w-full z-40 flex flex-col justify-between items-center px-md py-xs bg-surface-white border-t border-outline-variant shadow-xl">
+<div class="flex w-full justify-between"><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-transform duration-200 active:scale-95" href="#"><span class="material-symbols-outlined">info</span><span class="font-label-sm text-label-sm mt-1">Event Details</span></a><a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed font-bold hover:text-primary transition-transform duration-200 active:scale-95" href="#"><span class="material-symbols-outlined">fact_check</span><span class="font-label-sm text-label-sm mt-1">Review</span></a></div>
+</nav>
+<script>
+        function toggleAccordion(contentId, iconId) {
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+            
+            content.classList.toggle('open');
+            icon.classList.toggle('open');
+        }
+        
+        // Open first accordion by default
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleAccordion('av-content', 'av-icon');
+        });
+    </script>
+
+
+
+
+</body></html>

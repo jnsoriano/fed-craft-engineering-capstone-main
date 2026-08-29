@@ -1,0 +1,16 @@
+{
+    "storageKey": "eventcraft_wizard_state",
+    "schema": {
+        "version": 1,
+        "lastUpdated": "ISO timestamp",
+        "currentStep": 1,
+        "eventDetails": {},
+        "equipment": {},
+        "booking": {}
+    },
+    "clearConditions": [
+        "On successful booking submission",
+        "User clicks Start Over button",
+        "Manual clear from settings"
+    ]
+}
