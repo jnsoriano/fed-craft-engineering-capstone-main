@@ -164,7 +164,7 @@ Logic (per `pricing-rules.json` and design.md Section 2):
 
 ---
 
-## Task 4: Validation schemas (`lib/validation.ts`)
+## Task 4: Validation schemas (`lib/validation.ts`) ✅
 
 **Files to touch:**
 - `src/lib/validation.ts` (new)
@@ -195,7 +195,7 @@ the two conditions from `validation-rules.json`'s `warningsNonBlocking` (over 10
 
 ---
 
-## Task 5: Zustand store + localStorage persistence
+## Task 5: Zustand store + localStorage persistence ✅
 
 **Files to touch:**
 - `src/lib/store.ts` (new)
@@ -228,7 +228,7 @@ localStorage.
 
 ---
 
-## Task 6: GET API routes for reference data
+## Task 6: GET API routes for reference data ✅
 
 **Files to touch:**
 - `src/app/api/event-types/route.ts` (new)
@@ -255,7 +255,7 @@ deep-equals the imported JSON).
 
 ---
 
-## Task 7: POST /api/booking route
+## Task 7: POST /api/booking route ✅
 
 **Files to touch:**
 - `src/app/api/booking/route.ts` (new)
@@ -289,7 +289,7 @@ total in the response for the test to inspect).
 
 ---
 
-## Task 8: Shared UI components
+## Task 8: Shared UI components ✅
 
 **Files to touch (each with a co-located test in `__tests__/`):**
 - `src/components/ProgressStepper.tsx`
@@ -324,7 +324,7 @@ calls its `onSelect` handler on click.
 
 ---
 
-## Task 9: Step 1 page (`/`)
+## Task 9: Step 1 page (`/`) ✅
 
 **Files to touch:**
 - `src/app/page.tsx` (replace boilerplate)
