@@ -39,6 +39,7 @@ describe('ProgressStepper', () => {
         expect(screen.getByLabelText('Event Details completed')).toBeInTheDocument();
         expect(screen.getByLabelText('Step 2 of 2: Review')).toHaveAttribute('aria-current', 'step');
         expect(screen.getByText('Step 2 of 2: Review')).toHaveAttribute('aria-live', 'polite');
+        expect(screen.getByText('Step 2 of 2: Review')).not.toHaveClass('hidden');
     });
 });
 
@@ -53,6 +54,7 @@ describe('BudgetTrackerBar', () => {
 
         expect(screen.getByText(new RegExp(label))).toBeInTheDocument();
         expect(screen.getByTestId('budget-progress')).toHaveClass(colorClass);
+        expect(screen.getByRole('progressbar', { name: /budget used/i })).toHaveAttribute('aria-valuenow', String(spend));
     });
 });
 

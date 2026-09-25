@@ -346,7 +346,7 @@ while invalid; valid submission updates the store and navigates (mock `next/navi
 
 ---
 
-## Task 10: Step 2 page (`/review`)
+## Task 10: Step 2 page (`/review`) ✅
 
 **Files to touch:**
 - `src/app/review/page.tsx` (new)
@@ -370,24 +370,22 @@ booking API and navigates correctly for both success and failure mocked response
 
 ---
 
-## Task 11: Confirmation page (`/confirmation`)
+## Task 11: Confirmation page (`/confirmation`) ✅
 
-**Files to touch:**
-- `src/app/confirmation/page.tsx` (new)
+**Files to touch:** - `src/app/confirmation/page.tsx` (new)
 - `src/app/confirmation/__tests__/page.test.tsx` (new)
 
 **What to do:** Match `designs/eventcraft_booking_successful/code.html` exactly (success
 icon, heading, message, monospace reference code, two buttons). "Return to Dashboard"
 and "Plan Another Event" both call the store's `reset()` (clearing localStorage per
-`clearConditions`) and navigate to `/`. Redirect to `/` if no reference code is present
-in state (guards direct URL access).
+`clearConditions`) and navigate to `/`. Redirect to `/` if no reference code is present in state (guards direct URL access).
 
 **Test cases:** renders the reference code from store state; both buttons call `reset()`
 and navigate to `/`; redirects when no reference code present.
 
 ---
 
-## Task 12: Error page (`/error`)
+## Task 12: Error page (`/error`) ✅
 
 **Files to touch:**
 - `src/app/error/page.tsx` (new)
@@ -404,7 +402,7 @@ to `/review`; redirects when no state present.
 
 ---
 
-## Task 13: Accessibility pass
+## Task 13: Accessibility pass ✅
 
 **Files to touch:** all components/pages touched above (no new files)
 
@@ -420,7 +418,7 @@ receives focus after mount (`document.activeElement`).
 
 ---
 
-## Task 14: Final integration check
+## Task 14: Final integration check ✅
 
 **What to do:** Run the full user flow manually in the browser (`npm run dev`):
 Step 1 → Step 2 → submit a valid booking → confirm the Confirmation screen matches its

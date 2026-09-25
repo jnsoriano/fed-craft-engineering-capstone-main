@@ -6,14 +6,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight, BriefcaseBusiness, CalendarDays, Info, Minus, Plus, Save } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { DayPicker } from 'react-day-picker';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useRef, useState } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
 import type { Resolver } from 'react-hook-form';
 import { BudgetTrackerBar } from '@/components/BudgetTrackerBar';
 import { EventTypeCard } from '@/components/EventTypeCard';
 import { ProgressStepper } from '@/components/ProgressStepper';
 import { Button } from '@/components/ui/button';
 import { useWizardStore } from '@/lib/store';
+import { useFocusHeading } from '@/lib/use-focus-heading';
 import { useWizardPersistence } from '@/lib/use-wizard-persistence';
 import { eventDetailsSchema } from '@/lib/validation';
 import type { EventDetailsState, EventType } from '@/types/eventcraft';
@@ -27,17 +28,23 @@ export default function Home() {
     const [eventTypes, setEventTypes] = useState<EventType[]>([]);
     const details = useWizardStore((state) => state.eventDetails);
     const setEventDetails = useWizardStore((state) => state.setEventDetails);
-    useWizardPersistence();
+    const headingRef = useFocusHeading();
+    const isHydrated = useWizardPersistence();
+    const skipHydrationSync = useRef(true);
 
     const form = useForm<EventDetailsState>({
         resolver: zodResolver(eventDetailsSchema) as Resolver<EventDetailsState>,
         mode: 'onChange',
         defaultValues: details,
     });
-    const selectedEventType = form.watch('eventType');
-    const selectedDate = form.watch('eventDate');
-    const guests = form.watch('expectedGuests');
-    const budget = form.watch('budgetRange');
+    const selectedEventType = useWatch({ control: form.control, name: 'eventType' });
+    const selectedDate = useWatch({ control: form.control, name: 'eventDate' });
+    const guests = useWatch({ control: form.control, name: 'expectedGuests' });
+    const budget = useWatch({ control: form.control, name: 'budgetRange' });
+    const eventName = useWatch({ control: form.control, name: 'eventName' });
+    const eventDescription = useWatch({ control: form.control, name: 'eventDescription' });
+    const startTime = useWatch({ control: form.control, name: 'startTime' });
+    const endTime = useWatch({ control: form.control, name: 'endTime' });
     const selectedType = eventTypes.find((eventType) => eventType.id === selectedEventType);
 
     useEffect(() => {
@@ -45,6 +52,38 @@ export default function Home() {
             .then((response) => response.json())
             .then((data: EventTypesResponse) => setEventTypes(data.eventTypes));
     }, []);
+
+    useEffect(() => {
+        if (!isHydrated) {
+            return;
+        }
+
+        if (skipHydrationSync.current) {
+            skipHydrationSync.current = false;
+            return;
+        }
+
+        setEventDetails({
+            eventType: selectedEventType,
+            eventName,
+            eventDescription,
+            eventDate: selectedDate,
+            startTime,
+            endTime,
+            expectedGuests: guests,
+            budgetRange: budget,
+        });
+    }, [budget, endTime, eventDescription, eventName, guests, isHydrated, selectedDate, selectedEventType, setEventDetails, startTime]);
+
+    useEffect(() => {
+        if (isHydrated) {
+            form.reset(useWizardStore.getState().eventDetails);
+        }
+    }, [form, isHydrated]);
+
+    function saveDraft() {
+        setEventDetails(form.getValues());
+    }
 
     function submit(values: EventDetailsState) {
         setEventDetails(values);
@@ -67,7 +106,7 @@ export default function Home() {
                         <span className="font-heading text-2xl font-semibold">EventCraft</span>
                     </div>
                     <ProgressStepper currentStep={1} />
-                    <Button type="button" variant="ghost" className="text-on-surface-variant">
+                    <Button type="button" variant="ghost" aria-label="Save and exit" className="text-on-surface-variant" onClick={saveDraft}>
                         <Save aria-hidden="true" />
                         <span className="hidden sm:inline">Save &amp; Exit</span>
                     </Button>
@@ -76,7 +115,7 @@ export default function Home() {
 
             <main className="mx-auto max-w-[1200px] px-4 py-16 md:px-10">
                 <div className="mb-10">
-                    <h1 className="font-heading text-3xl font-semibold text-primary md:text-4xl">Let&apos;s craft your event</h1>
+                    <h1 ref={headingRef} tabIndex={-1} className="font-heading text-3xl font-semibold text-primary outline-none md:text-4xl">Let&apos;s craft your event</h1>
                     <p className="mt-2 text-lg text-on-surface-variant">Start by defining the core details and budget for your upcoming experience.</p>
                 </div>
 
@@ -161,7 +200,7 @@ export default function Home() {
                     </section>
 
                     <div className="flex justify-end gap-4">
-                        <Button type="button" variant="outline" className="h-12 px-6">Save Draft</Button>
+                        <Button type="button" variant="outline" className="h-12 px-6" onClick={saveDraft}>Save Draft</Button>
                         <Button type="submit" className="h-12 px-8">Continue to Review <ArrowRight aria-hidden="true" /></Button>
                     </div>
                 </form>

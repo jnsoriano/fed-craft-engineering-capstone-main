@@ -163,3 +163,13 @@
     @apply font-sans;
   }
 }
+
+@layer components {
+  .field {
+    @apply w-full rounded-lg border border-outline-variant bg-surface px-4 py-3 text-on-surface outline-none transition-colors placeholder:text-outline focus:border-accent focus:ring-2 focus:ring-accent/20;
+  }
+
+  .field-label {
+    @apply block font-mono text-xs font-medium text-on-surface;
+  }
+}

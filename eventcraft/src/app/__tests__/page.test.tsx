@@ -22,6 +22,7 @@ function renderPage() {
 
 describe('Event Details page', () => {
     beforeEach(() => {
+        localStorage.clear();
         push.mockReset();
         useWizardStore.getState().reset();
     });
@@ -30,7 +31,10 @@ describe('Event Details page', () => {
         renderPage();
 
         expect(await screen.findByRole('button', { name: /select corporate conference/i })).toBeInTheDocument();
-        expect(screen.getByRole('heading', { name: /let's craft your event/i })).toBeInTheDocument();
+        expect(screen.getByRole('heading', { name: /let's craft your event/i })).toHaveFocus();
+        expect(screen.getByRole('slider', { name: /total budget range/i })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /increase expected guests/i })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /save and exit/i })).toBeInTheDocument();
         expect(global.fetch).toHaveBeenCalledWith('/api/event-types');
     });
 
@@ -62,5 +66,46 @@ describe('Event Details page', () => {
             eventName: 'Jordan and Casey Wedding',
             expectedGuests: initialWizardState.eventDetails.expectedGuests,
         });
+    });
+
+    it('persists a partial draft as fields change and when Save Draft is selected', async () => {
+        const user = userEvent.setup();
+        renderPage();
+
+        await user.click(await screen.findByRole('button', { name: /select corporate conference/i }));
+        await user.type(screen.getByLabelText(/event name/i), 'Draft event');
+        await user.click(screen.getByRole('button', { name: 'Save Draft' }));
+
+        await waitFor(() => expect(useWizardStore.getState().eventDetails).toMatchObject({
+            eventType: 'corporate-conference',
+            eventName: 'Draft event',
+        }));
+        await waitFor(() => expect(JSON.parse(localStorage.getItem('eventcraft_wizard_state') ?? '{}')).toMatchObject({
+            eventDetails: {
+                eventType: 'corporate-conference',
+                eventName: 'Draft event',
+            },
+        }));
+    });
+
+    it('restores a persisted draft after hydration', async () => {
+        localStorage.setItem('eventcraft_wizard_state', JSON.stringify({
+            version: 1,
+            lastUpdated: '2026-09-03T00:00:00.000Z',
+            currentStep: 1,
+            eventDetails: {
+                ...initialWizardState.eventDetails,
+                eventType: 'corporate-conference',
+                eventName: 'Restored Draft',
+                eventDate: null,
+            },
+            equipment: initialWizardState.equipment,
+            booking: initialWizardState.booking,
+        }));
+
+        renderPage();
+
+        await waitFor(() => expect(screen.getByLabelText(/event name/i)).toHaveValue('Restored Draft'));
+        expect(screen.getByRole('button', { name: /select corporate conference/i })).toHaveAttribute('aria-pressed', 'true');
     });
 });

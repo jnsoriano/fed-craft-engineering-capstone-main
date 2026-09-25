@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     );
 
     if (getBudgetWarning(priceBreakdown.total, eventDetails.data.budgetRange) === 'You are over budget') {
-        return NextResponse.json({ success: false, reason: 'over_budget' }, { status: 400 });
+        return NextResponse.json({ success: false, reason: 'over_budget' });
     }
 
     return NextResponse.json({

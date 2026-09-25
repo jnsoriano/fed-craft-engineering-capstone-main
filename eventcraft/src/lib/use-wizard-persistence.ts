@@ -2,27 +2,29 @@
 
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
 import { fromPersistedWizardState, toPersistedWizardState, useWizardStore } from './store';
 import type { PersistedWizardState } from './store';
 
 export const WIZARD_STORAGE_KEY = 'eventcraft_wizard_state';
 
-export function useWizardPersistence(): void {
+export function useWizardPersistence(): boolean {
     const [persistedState, setPersistedState, { removeItem }] = useLocalStorageState<PersistedWizardState>(WIZARD_STORAGE_KEY);
     const hydrated = useRef(false);
+    const [isHydrated, setIsHydrated] = useState(false);
 
     useEffect(() => {
         if (hydrated.current) {
             return;
         }
 
-        const state = fromPersistedWizardState(persistedState);
+        const state = fromPersistedWizardState(readPersistedState(persistedState));
         if (state) {
             useWizardStore.getState().hydrate(state);
         }
         hydrated.current = true;
+        setIsHydrated(true);
     }, [persistedState]);
 
     useEffect(() => {
@@ -41,6 +43,17 @@ export function useWizardPersistence(): void {
 
         return unsubscribe;
     }, [removeItem, setPersistedState]);
+
+    return isHydrated;
+}
+
+function readPersistedState(fallback: PersistedWizardState | undefined): unknown {
+    try {
+        const storedValue = localStorage.getItem(WIZARD_STORAGE_KEY);
+        return storedValue === null ? fallback : JSON.parse(storedValue);
+    } catch {
+        return fallback;
+    }
 }
 
 function isInitialWizardState(state: ReturnType<typeof useWizardStore.getState>): boolean {

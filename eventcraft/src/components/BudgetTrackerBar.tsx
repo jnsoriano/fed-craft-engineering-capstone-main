@@ -23,6 +23,11 @@ export function BudgetTrackerBar({ currentSpend, totalBudget }: BudgetTrackerBar
                     <div className="h-2 overflow-hidden rounded-full bg-surface-container-high">
                         <div
                             data-testid="budget-progress"
+                            role="progressbar"
+                            aria-label="Budget used"
+                            aria-valuemin={0}
+                            aria-valuemax={totalBudget}
+                            aria-valuenow={currentSpend}
                             className={`h-full ${status.colorClass}`}
                             style={{ width: `${Math.min(percentage, 100)}%` }}
                         />

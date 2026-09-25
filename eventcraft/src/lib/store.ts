@@ -18,12 +18,19 @@ export interface PersistedWizardState {
 }
 
 interface WizardStore extends WizardState {
+    submission: BookingSubmissionState;
     setEventDetails: (details: Partial<EventDetailsState>) => void;
     setEquipmentQuantity: (equipmentId: string, quantity: number) => void;
     setBookingContact: (contact: Partial<BookingContactState>) => void;
     setCurrentStep: (step: 1 | 2) => void;
+    setSubmissionResult: (result: BookingSubmissionState) => void;
     hydrate: (state: WizardState) => void;
     reset: () => void;
+}
+
+interface BookingSubmissionState {
+    referenceCode: string | null;
+    failureReason: string | null;
 }
 
 export const initialWizardState: WizardState = {
@@ -52,6 +59,7 @@ export const initialWizardState: WizardState = {
 
 export const useWizardStore = create<WizardStore>((set) => ({
     ...initialWizardState,
+    submission: { referenceCode: null, failureReason: null },
     setEventDetails: (details) => set((state) => ({
         eventDetails: { ...state.eventDetails, ...details },
     })),
@@ -69,8 +77,12 @@ export const useWizardStore = create<WizardStore>((set) => ({
         booking: { ...state.booking, ...contact },
     })),
     setCurrentStep: (currentStep) => set({ currentStep }),
+    setSubmissionResult: (submission) => set({ submission }),
     hydrate: (state) => set(state),
-    reset: () => set(initialWizardState),
+    reset: () => set({
+        ...initialWizardState,
+        submission: { referenceCode: null, failureReason: null },
+    }),
 }));
 
 export function toPersistedWizardState(state: WizardState): PersistedWizardState {

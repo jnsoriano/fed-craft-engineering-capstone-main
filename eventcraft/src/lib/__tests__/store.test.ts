@@ -23,6 +23,7 @@ describe('useWizardStore', () => {
         useWizardStore.getState().setEquipmentQuantity('projector-screen', 2);
         useWizardStore.getState().setBookingContact({ contactName: 'Jordan Lee' });
         useWizardStore.getState().setCurrentStep(2);
+        useWizardStore.getState().setSubmissionResult({ referenceCode: 'EVT-20260902-1234', failureReason: null });
 
         const state = useWizardStore.getState();
         expect(state.eventDetails).toMatchObject({
@@ -34,6 +35,7 @@ describe('useWizardStore', () => {
         expect(state.equipment.selectedEquipment).toEqual({ 'projector-screen': 2 });
         expect(state.booking.contactName).toBe('Jordan Lee');
         expect(state.currentStep).toBe(2);
+        expect(state.submission.referenceCode).toBe('EVT-20260902-1234');
     });
 
     it('removes equipment when its quantity is set to zero', () => {
@@ -48,10 +50,12 @@ describe('useWizardStore', () => {
         useWizardStore.getState().setEquipmentQuantity('wireless-mic', 2);
         useWizardStore.getState().setBookingContact({ contactName: 'Jordan Lee' });
         useWizardStore.getState().setCurrentStep(2);
+        useWizardStore.getState().setSubmissionResult({ referenceCode: null, failureReason: 'over_budget' });
 
         useWizardStore.getState().reset();
 
         expect(useWizardStore.getState()).toMatchObject(initialWizardState);
+        expect(useWizardStore.getState().submission).toEqual({ referenceCode: null, failureReason: null });
     });
 });
 
